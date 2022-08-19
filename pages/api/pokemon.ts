@@ -1,12 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Pokemon[]>

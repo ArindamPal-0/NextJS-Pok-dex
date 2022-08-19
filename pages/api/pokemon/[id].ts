@@ -1,17 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Stat = {
-  name: string;
-  value: number;
-};
-
-type PokemonDetail = {
-  name: string;
-  type: string[];
-  stats: Stat[];
-  image: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PokemonDetail>

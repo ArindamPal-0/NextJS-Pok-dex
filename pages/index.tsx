@@ -1,9 +1,30 @@
-import type { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 
-const Home: NextPage = () => {
+type HomeProps = {
+  pokemons: Pokemon[];
+};
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+  context
+) => {
+  const { req } = context;
+  const host = req.headers.host;
+  const protocol = req.headers["x-forwarded-proto"] ? "https" : "http";
+  console.log(protocol, host);
+  const res = await fetch(`${protocol}://${host}/api/search`);
+  const pokemons = (await res.json()) as Pokemon[];
+
+  return {
+    props: {
+      pokemons,
+    },
+  };
+};
+
+const Home: NextPage<HomeProps> = ({ pokemons }) => {
   return (
     <div>
       <Head>
@@ -20,6 +41,7 @@ const Home: NextPage = () => {
           width={200}
           height={200}
         />
+        <div>{JSON.stringify(pokemons)}</div>
       </Container>
     </div>
   );
