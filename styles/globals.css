@@ -16,6 +16,13 @@ a:hover {
   font-family: "pokemon-solid";
 }
 
+/* .pokemonfont:hover {
+  color: rgb(231, 194, 71);
+  -webkit-text-stroke-color: #006ac0;
+  -webkit-text-stroke-width: 4px;
+  -webkit-text-stroke: initial;
+} */
+
 .card:hover {
   border-color: #5db6ff;
 }

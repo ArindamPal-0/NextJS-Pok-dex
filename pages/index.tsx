@@ -7,6 +7,7 @@ import PokemonCard from "../components/PokemonCard";
 
 type HomeProps = {
   pokemons: Pokemon[];
+  search_api: string;
 };
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
@@ -19,18 +20,33 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   // console.log(protocol, host);
 
   // make the api request to fetch pokemons for server side rendering
-  const res = await fetch(`${protocol}://${host}/api/search`);
+  const search_api = `${protocol}://${host}/api/search`;
+  const res = await fetch(search_api);
   const pokemons = (await res.json()) as Pokemon[];
 
   return {
     props: {
       pokemons,
+      search_api,
     },
   };
 };
 
-const Home: NextPage<HomeProps> = ({ pokemons }) => {
+const Home: NextPage<HomeProps> = ({ pokemons, search_api }) => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>(pokemons);
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const onSearchTerm = async (e: React.FormEvent<HTMLInputElement>) => {
+    const text: string = e.currentTarget.value.trim();
+
+    if (searchTerm !== text) {
+      setSearchTerm(text);
+
+      const res = await fetch(`${search_api}?q=${text}`);
+      setPokemonList((await res.json()) as Pokemon[]);
+    }
+  };
 
   return (
     <div className="container-fluid p-0">
@@ -41,6 +57,18 @@ const Home: NextPage<HomeProps> = ({ pokemons }) => {
       </Head>
 
       <Header title="Pokédex" />
+      <div className="input-group my-5 d-flex justify-content-center">
+        <input
+          type="search"
+          autoComplete="off"
+          onChange={onSearchTerm}
+          value={searchTerm}
+          placeholder="Search for a Pokémon"
+          className="fs-4 py-2 px-3 rounded border border-gray-800"
+          style={{ width: "50%" }}
+        />
+      </div>
+
       <div className="container my-5">
         <div className="row gy-5">
           {pokemonList.map((pokemon) => (
