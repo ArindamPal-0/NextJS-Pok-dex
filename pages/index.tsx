@@ -1,7 +1,9 @@
 import type { NextPage, GetServerSideProps } from "next";
+import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import { Container } from "react-bootstrap";
+
+import Header from "../components/Header";
+import PokemonCard from "../components/PokemonCard";
 
 type HomeProps = {
   pokemons: Pokemon[];
@@ -10,10 +12,13 @@ type HomeProps = {
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   context
 ) => {
+  // get the base url of the nextjs app for api request
   const { req } = context;
   const host = req.headers.host;
   const protocol = req.headers["x-forwarded-proto"] ? "https" : "http";
-  console.log(protocol, host);
+  // console.log(protocol, host);
+
+  // make the api request to fetch pokemons for server side rendering
   const res = await fetch(`${protocol}://${host}/api/search`);
   const pokemons = (await res.json()) as Pokemon[];
 
@@ -25,24 +30,24 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
 };
 
 const Home: NextPage<HomeProps> = ({ pokemons }) => {
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>(pokemons);
+
   return (
-    <div>
+    <div className="container-fluid p-0">
       <Head>
         <title>Pokédex</title>
         <meta name="description" content="NextJS Pokédex" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/pokeball.png" type="image/png" />
       </Head>
 
-      <Container>
-        <h1 className="pokemonfont">Pokédex</h1>
-        <Image
-          src="https://arindampal-0.github.io/pokemon-api/images/pikachu.jpg"
-          alt="Pikachu"
-          width={200}
-          height={200}
-        />
-        <div>{JSON.stringify(pokemons)}</div>
-      </Container>
+      <Header title="Pokédex" />
+      <div className="container my-5">
+        <div className="row gy-5">
+          {pokemonList.map((pokemon) => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

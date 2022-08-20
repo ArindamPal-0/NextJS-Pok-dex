@@ -3,6 +3,19 @@
   src: url(./fonts/pokemon-solid.ttf) format("truetype");
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+}
+
 .pokemonfont {
   font-family: "pokemon-solid";
+}
+
+.card:hover {
+  border-color: #5db6ff;
 }
