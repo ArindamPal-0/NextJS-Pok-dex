@@ -1,6 +1,14 @@
 # NextJS Pokédex
 
-### NextJS Pokédex trial1 - SSR + CSR
+<img src="public/pokeball.png" alt="pokeball" style="width: 50px; height: auto;" />
+
+<br>
+
+## NextJS Pokédex trial - SSR + CSR + SSG
+
+- Server Side Rendered initail page with random 10 pokemon list.
+- Client Side Search feature and pokemon list refresh.
+- Static Site Generation of the details page of the Pokemons.
 
 <br>
 
