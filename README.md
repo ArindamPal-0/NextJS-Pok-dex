@@ -25,6 +25,12 @@ $ npm run dev
 
 <br>
 
+## Vercel Deployed
+
+[https://nextjs-pokedex-ssr.vercel.app/](https://nextjs-pokedex-ssr.vercel.app/)
+
+<br>
+
 ## Pokémon font used
 
 [Pokémon Font](https://www.dafont.com/pokemon.font)
