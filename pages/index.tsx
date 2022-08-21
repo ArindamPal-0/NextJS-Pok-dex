@@ -56,19 +56,26 @@ const Home: NextPage<HomeProps> = ({ pokemons, search_api }) => {
         <link rel="icon" href="/pokeball.png" type="image/png" />
       </Head>
 
+      {/* Page Header */}
       <Header title="Pokédex" />
-      <div className="input-group my-5 d-flex justify-content-center">
-        <input
-          type="search"
-          autoComplete="off"
-          onChange={onSearchTerm}
-          value={searchTerm}
-          placeholder="Search for a Pokémon"
-          className="fs-4 py-2 px-3 rounded border border-gray-800"
-          style={{ width: "50%" }}
-        />
+
+      {/* Search Field */}
+      <div className="my-5 container">
+        <div className="row justify-content-center">
+          <div className="col-sm-12 col-md-6">
+            <input
+              type="search"
+              autoComplete="off"
+              onChange={onSearchTerm}
+              value={searchTerm}
+              placeholder="Search for a Pokémon"
+              className="fs-4 py-2 px-md-3 rounded border border-gray-800 w-100"
+            />
+          </div>
+        </div>
       </div>
 
+      {/* List of Pokemon Cards */}
       <div className="container my-5">
         <div className="row gy-5">
           {pokemonList.map((pokemon) => (

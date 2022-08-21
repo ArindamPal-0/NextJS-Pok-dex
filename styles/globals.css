@@ -16,6 +16,10 @@ a:hover {
   font-family: "pokemon-solid";
 }
 
+.link:hover {
+  color: #017de2;
+}
+
 /* .pokemonfont:hover {
   color: rgb(231, 194, 71);
   -webkit-text-stroke-color: #006ac0;

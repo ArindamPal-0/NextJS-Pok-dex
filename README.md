@@ -6,9 +6,9 @@
 
 ## NextJS Pokédex trial - SSR + CSR + SSG
 
-- Server Side Rendered initail page with random 10 pokemon list.
-- Client Side Search feature and pokemon list refresh.
-- Static Site Generation of the details page of the Pokemons.
+- Server Side Rendered initail page with random 10 pokémon list.
+- Client Side Search feature and pokémon list refresh.
+- Static Site Generation of the details page of the pokémons.
 
 <br>
 
